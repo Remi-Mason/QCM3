@@ -3,8 +3,18 @@
   "short_name": "QCM SSIAP",
   "icons": [
     {
-      "src": "/QCM3/favicon.png",
+      "src": "favicon.png",
       "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "128x128",
       "type": "image/png"
     }
   ],
