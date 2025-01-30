@@ -64,6 +64,12 @@
             margin: 10px 0;
             font-size: 18px;
         }
+        .option input[type="checkbox"] {
+            width: 28px;
+            height: 28px;
+            margin-right: 10px;
+        }
+
         .option input[type="radio"] {
             margin-left: 10px;  
 		    width: 24px;
@@ -152,22 +158,36 @@
     <script>
         const questions = [
             {
-                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Quel est le symbole chimique de l'eau ?</span>",
-                options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>O2</span>",
-				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>H2O</span>",
-				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>CO2</span>",
-				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>HO2SO4</span>"],
-                answer: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>H2O</span>",
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Sur quel feu peut-on utiliser un extincteur à eau pulvérisée avec additif (A.F.F.F):</span>",
+                options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe C</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe D</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe F</span>",
+                "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Aucune des réponses</span>"
+				],
+                answer: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
+				         "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>"],
             },
             {
-                question: "<span style='font-family: Arial Black;'>Combien de continents y a-t-il sur Terre ?</span>",
-                options: ["5", "6", "7", "8"],
-                answer: "7"
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Sur quel feu peut-on utiliser un extincteur CO2:</span>",
+                options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe C</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe D</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Aucune des réponses</span>"],
+                answer: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>"],
             },
             {
-                question: "<span style='font-family: Arial Black;'>Quelle planète est surnommée la planète rouge ?</span>",
-                options: ["Mars", "Venus", "Jupiter", "Saturne"],
-                answer: "Mars"
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Sur quel feu peut-on utiliser un extincteur à eau pulvérisée:</span>",
+                options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe C</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe D</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe F</span>",
+                "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Aucune des réponses</span>"
+				],
+                answer:  ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>"],
             }
         ];
 
@@ -195,12 +215,12 @@ let score = 0;
             questionDiv.classList.add("question");
             questionDiv.innerHTML = `<p><span style='font-weight: bold; text-shadow: 2px 2px 1px black;'>${currentQuestionIndex + 1}.</span> <span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>${q.question}</span></p>`;
 
-            // Affichage des choix (A, B, C, D)
-            const letters = ["A","B","C","D"];
+            // Affichage des choix (A, B, C, D, E, F)
+            const letters = ["A","B","C","D","E","F"];
             q.options.forEach((option, index) => {
                 questionDiv.innerHTML += `
             <label class="option">
-            <span style='font-family: Arial Black; font-weight: bold; text-shadow: 2px 2px 1px black;'>${letters[index]}&nbsp;&nbsp;</span> <span style='font-weight: bold; text-shadow: 2px 2px 1px black;'>-</span> <input type="radio" name="question" value="${option}"> ${option}
+            <span style='font-family: Arial Black; font-weight: bold; text-shadow: 2px 2px 1px black;'>${letters[index]}&nbsp;&nbsp;</span> <span style='font-weight: bold; text-shadow: 2px 2px 1px black;'>-</span> <input type="checkbox" name="question" value="${option}"> ${option}
             </label>
              `;
             });
@@ -211,19 +231,19 @@ let score = 0;
         }
 
         function submitAnswer() {
-            const selectedOption = document.querySelector("input[name='question']:checked");
-            if (!selectedOption) {
+            const selectedOptions = Array.from(document.querySelectorAll("input[name='question']:checked"));
+            if (selectedOptions.length === 0) {
                 alert("Veuillez sélectionner une réponse");
                 return;
             }
 
             document.getElementById("validateBtn").style.display = "none";
 
-            const correctAnswer = questions[currentQuestionIndex].answer;
+            const correctAnswer = Array.isArray(questions[currentQuestionIndex].answer) ? questions[currentQuestionIndex].answer : [questions[currentQuestionIndex].answer];
             const answerElement = document.getElementById("answer");
 
             // Bonne ou mauvaise réponse
-            if (selectedOption.value === correctAnswer) {
+            if (Array.isArray(correctAnswer) && selectedOptions.every(opt => correctAnswer.includes(opt.value)) && selectedOptions.length === correctAnswer.length) {
                 score++;
                 answerElement.innerHTML = `
                     <span style='color: white; font-weight: bold; background-color: #333333; padding: 5px; border-radius: 5px;'>
@@ -241,7 +261,7 @@ let score = 0;
             answerElement.style.display = "block";
 
             // Délai de passage à la question suivante
-            const nextDelay = selectedOption.value === correctAnswer ? 1000 : 4000;
+            const nextDelay = selectedOptions.every(opt => correctAnswer.includes(opt.value)) && selectedOptions.length === correctAnswer.length ? 1000 : 4000;
             setTimeout(() => {
                 currentQuestionIndex++;
 
