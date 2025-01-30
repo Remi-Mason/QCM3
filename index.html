@@ -128,6 +128,39 @@
             animation: elasticCycle 11s ease-in-out infinite;
             display: inline-block;
         }
+    
+        /* ===========================
+           Version responsive pour mobile
+           =========================== */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%; /* Utilisation plus large sur téléphone */
+                height: 100vh; /* Remplit mieux l'écran */
+                border-radius: 0; /* Supprime les bords arrondis pour un meilleur affichage */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 10px;
+            }
+            h2 {
+                font-size: 50px; /* Ajuste la taille du titre sur mobile */
+            }
+            .question {
+                font-size: 22px; /* Augmente la taille des questions */
+            }
+            .option {
+                font-size: 20px; /* Meilleure lisibilité sur petit écran */
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            #validateBtn, #restartBtn, #startBtn {
+                width: 100%; /* Augmente la taille des boutons pour un confort tactile */
+                padding: 15px;
+                font-size: 20px;
+            }
+        }
     </style>
     <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
     <audio id="startSound" src="audio/startSound.mp3" preload="auto"></audio>
