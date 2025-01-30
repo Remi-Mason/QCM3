@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>QCM en Ligne</title>
+    <style>
+        /* ===========================
+           1. Importer la police Vacaciones Outline
+           =========================== */
+        @font-face {
+            font-family: "Vacaciones Outline";
+            /*
+               Placez VacacionesOutline.woff et/ou VacacionesOutline.woff2
+               dans un dossier "fonts".
+
+               Ajustez le chemin (url) si vous mettez les fichiers à un autre endroit.
+            */
+            src: url("fonts/VacacionesOutline.woff2") format("woff2"),
+                 url("fonts/VacacionesOutline.woff") format("woff");
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #b22222, #ff6347);
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        /* ===========================
+           2. Appliquer la police au titre.
+           =========================== */
+        h2 {
+            font-family: "Vacaciones Outline", Arial, sans-serif;
+            font-size: 60px;
+            font-weight: normal; /* La police Outline est déjà "bold" par aspect visuel */
+            color: white;
+            text-shadow: 1.5px 1.5px 0 black;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .option input[type="radio"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+        .answer {
+            font-size: 20px;
+            font-family: 'Arial Black', sans-serif;
+            color: white;
+            text-shadow: 2px 2px 0 black;
+            font-weight: bold;
+            display: none;
+            margin-top: 5px;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-shadow: 1px 1px 2px black;
+        }
+        #validateBtn,
+        #startBtn {
+            display: block;
+            margin: 20px auto;
+            padding: 8px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            background: linear-gradient(to top, black, gray);
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            text-shadow: 1px 1px 2px black;
+        }
+        #restartBtn {
+            display: none;
+            margin: 20px auto;
+            padding: 12px 18px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 90%;
+            max-width: 300px;
+            background-color: white;
+            color: #b22222;
+            border: none;
+            border-radius: 5px;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        /* ===========================
+           Animation élastique récurrente (11s)
+           ~2s de bounce (0 → 18%) puis ~9s stable
+        =========================== */
+        @keyframes elasticCycle {
+            0%   { transform: scale(1); }
+            5%   { transform: scale(1.2); }
+            18%  { transform: scale(1);   }
+            100% { transform: scale(1);   }
+        }
+        .elastic {
+            animation: elasticCycle 11s ease-in-out infinite;
+            display: inline-block;
+        }
+    </style>
+    <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
+    <audio id="startSound" src="audio/startSound.mp3" preload="auto"></audio>
+    <!-- Son pour score parfait -->
+    <audio id="perfectScoreSound" src="audio/perfectScore.mp3" preload="auto"></audio>
+</head>
+<body>
+    <div class="container" id="welcomeScreen">
+        <h2 class="elastic">Q.C.M  S.S.I.A.P 1</h2>
+		<p>Édition: Le Feu Dans Ta Face !</p>
+        <p>🔥 Cliquez sur le bouton ci-dessous pour commencer le test. 🔥</p>
+        <button id="startBtn" onclick="startQuiz()">Commencer</button>
+    </div>
+    
+    <div class="container" id="quizContainer" style="display: none;">
+        <div id="quiz"></div>
+        <button id="validateBtn" onclick="submitAnswer()">Valider</button>
+        <div id="result"></div>
+        <button id="restartBtn" onclick="restartQuiz()">Recommencer</button>
+    </div>
+    
+    <script>
+        const questions = [
+            {
+                question: "<span style='font-family: Arial Black;'>Quel est le symbole chimique de l'eau ?</span>",
+                options: ["O2", "H2O", "CO2", "H2SO4"],
+                answer: "H2O"
+            },
+            {
+                question: "<span style='font-family: Arial Black;'>Combien de continents y a-t-il sur Terre ?</span>",
+                options: ["5", "6", "7", "8"],
+                answer: "7"
+            },
+            {
+                question: "<span style='font-family: Arial Black;'>Quelle planète est surnommée la planète rouge ?</span>",
+                options: ["Mars", "Venus", "Jupiter", "Saturne"],
+                answer: "Mars"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+let score = 0;
+
+        function startQuiz() {
+            // Lecture du son au clic sur 'Commencer'
+            const audio = document.getElementById('startSound');
+            if(audio){
+                audio.play().catch(err => console.log("Lecture audio bloquée :", err));
+            }
+            document.getElementById("welcomeScreen").style.display = "none";
+            document.getElementById("quizContainer").style.display = "block";
+            loadQuiz();
+        }
+
+        function loadQuiz() {
+            const quizContainer = document.getElementById("quiz");
+            quizContainer.innerHTML = "";
+            document.getElementById("validateBtn").style.display = "block";
+            
+            const q = questions[currentQuestionIndex];
+            const questionDiv = document.createElement("div");
+            questionDiv.classList.add("question");
+            questionDiv.innerHTML = `<p>${currentQuestionIndex + 1}. ${q.question}</p>`;
+
+            // Affichage des choix (A, B, C, D)
+            const letters = ["A","B","C","D"];
+            q.options.forEach((option, index) => {
+                questionDiv.innerHTML += `
+                    <label class="option">
+                        ${letters[index]} - <input type="radio" name="question" value="${option}"> ${option}
+                    </label>
+                `;
+            });
+
+            // Zone d'affichage de la réponse
+            questionDiv.innerHTML += `<p id="answer" class="answer"></p>`;
+            quizContainer.appendChild(questionDiv);
+        }
+
+        function submitAnswer() {
+            const selectedOption = document.querySelector("input[name='question']:checked");
+            if (!selectedOption) {
+                alert("Veuillez sélectionner une réponse");
+                return;
+            }
+
+            document.getElementById("validateBtn").style.display = "none";
+
+            const correctAnswer = questions[currentQuestionIndex].answer;
+            const answerElement = document.getElementById("answer");
+
+            // Bonne ou mauvaise réponse
+            if (selectedOption.value === correctAnswer) {
+                score++;
+                answerElement.innerHTML = `
+                    <span style='color: white; font-weight: bold; background-color: #333333; padding: 5px; border-radius: 5px;'>
+                        Bonne réponse ! ✅
+                    </span>
+                `;
+            } else {
+                answerElement.innerHTML = `
+                    <span style="color: #FF0000; font-weight: bold; padding: 5px; border-radius: 5px;">❌</span>
+                    <span style='background-color: blue; color: white; padding: 5px; border-radius: 5px;'>
+                        La bonne réponse est :
+                    </span> ${correctAnswer}
+                `;
+            }
+            answerElement.style.display = "block";
+
+            // Délai de passage à la question suivante
+            const nextDelay = selectedOption.value === correctAnswer ? 1000 : 4000;
+            setTimeout(() => {
+                currentQuestionIndex++;
+
+                if (currentQuestionIndex < questions.length) {
+                    loadQuiz();
+                } else {
+                    document.getElementById("quiz").innerHTML = `<p>Quiz terminé ! 🎉<br>Score : ${score} / ${questions.length}</p>`;
+
+                    // Lecture du son si le score est parfait
+                    if(score === questions.length) {
+                        const perfectSound = document.getElementById('perfectScoreSound');
+                        if(perfectSound){
+                            perfectSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+                        }
+                    }
+                    document.getElementById("restartBtn").style.display = "block";
+                }
+            }, nextDelay);
+        }
+
+        function restartQuiz() {
+    // Interruption éventuelle du son parfait
+    const perfectSound = document.getElementById('perfectScoreSound');
+    if (perfectSound) {
+        perfectSound.pause();
+        perfectSound.currentTime = 0;
+    }
+
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById("restartBtn").style.display = "none";
+    document.getElementById("quiz").innerHTML = "";
+    loadQuiz();
+}
+    </script>
+</body>
+</html>
