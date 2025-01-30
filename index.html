@@ -35,14 +35,6 @@
             color: white;
         }
         .container {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                width: 90%;
-                height: 90vh;
-                padding: 15px;
-                text-align: center;
             max-width: 600px;
             width: 100%;
             padding: 20px;
@@ -62,11 +54,6 @@
             text-shadow: 1.5px 1.5px 0 black;
         }
         .question {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 50vh; /* Ajuste la hauteur pour mieux centrer */
             font-size: 20px;
             margin-bottom: 10px;
             color: white;
@@ -141,56 +128,6 @@
             animation: elasticCycle 11s ease-in-out infinite;
             display: inline-block;
         }
-    
-        /* ===========================
-           Version responsive pour mobile
-           =========================== */
-        @media (max-width: 768px) {
-            .question {
-                height: 60vh; /* Ajuste la hauteur sur mobile pour centrer les questions */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-            }
-            body {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                width: 100vw;
-                margin: 0;
-                padding: 0;
-            }
-            .container {
-                width: 95%; /* Utilisation plus large sur téléphone */
-                height: 100vh; /* Remplit mieux l'écran */
-                border-radius: 0; /* Supprime les bords arrondis pour un meilleur affichage */
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                padding: 10px;
-            }
-            h2 {
-                font-size: 50px; /* Ajuste la taille du titre sur mobile */
-            }
-            .question {
-                font-size: 22px; /* Augmente la taille des questions */
-            }
-            .option {
-                font-size: 20px; /* Meilleure lisibilité sur petit écran */
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-            }
-            #validateBtn, #restartBtn, #startBtn {
-                width: 100%; /* Augmente la taille des boutons pour un confort tactile */
-                padding: 15px;
-                font-size: 20px;
-            }
-        }
     </style>
     <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
     <audio id="startSound" src="audio/startSound.mp3" preload="auto"></audio>
@@ -220,7 +157,7 @@
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>H2O</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>CO2</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>HO2SO4</span>"],
-                answer: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>H2O</span>"
+                answer: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>H2O</span>",
             },
             {
                 question: "<span style='font-family: Arial Black;'>Combien de continents y a-t-il sur Terre ?</span>",
