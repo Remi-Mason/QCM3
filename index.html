@@ -65,7 +65,8 @@
             font-size: 18px;
         }
         .option input[type="radio"] {
-            width: 24px;
+            margin-left: 10px;  
+		    width: 24px;
             height: 24px;
             margin-right: 10px;
         }
@@ -151,9 +152,12 @@
     <script>
         const questions = [
             {
-                question: "<span style='font-family: Arial Black;'>Quel est le symbole chimique de l'eau ?</span>",
-                options: ["O2", "H2O", "CO2", "H2SO4"],
-                answer: "H2O"
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Quel est le symbole chimique de l'eau ?</span>",
+                options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>O2</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>H2O</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>CO2</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>HO2SO4</span>"],
+                answer: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>H2O</span>"
             },
             {
                 question: "<span style='font-family: Arial Black;'>Combien de continents y a-t-il sur Terre ?</span>",
@@ -189,16 +193,16 @@ let score = 0;
             const q = questions[currentQuestionIndex];
             const questionDiv = document.createElement("div");
             questionDiv.classList.add("question");
-            questionDiv.innerHTML = `<p>${currentQuestionIndex + 1}. ${q.question}</p>`;
+            questionDiv.innerHTML = `<p><span style='font-weight: bold; text-shadow: 2px 2px 1px black;'>${currentQuestionIndex + 1}.</span> <span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>${q.question}</span></p>`;
 
             // Affichage des choix (A, B, C, D)
             const letters = ["A","B","C","D"];
             q.options.forEach((option, index) => {
                 questionDiv.innerHTML += `
-                    <label class="option">
-                        ${letters[index]} - <input type="radio" name="question" value="${option}"> ${option}
-                    </label>
-                `;
+            <label class="option">
+            <span style='font-family: Arial Black; font-weight: bold; text-shadow: 2px 2px 1px black;'>${letters[index]}&nbsp;&nbsp;</span> <span style='font-weight: bold; text-shadow: 2px 2px 1px black;'>-</span> <input type="radio" name="question" value="${option}"> ${option}
+            </label>
+             `;
             });
 
             // Zone d'affichage de la réponse
