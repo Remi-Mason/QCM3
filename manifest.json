@@ -1,5 +1,5 @@
 {
-  "name": "QCM SSIAP 1",
+  "name": "QCM SSIAP 1 Livre AFPA",
   "short_name": "QCM SSIAP",
   "icons": [
     {
@@ -18,7 +18,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "https://github.com/Remi-Mason/QCM3/blob/main/index.html",
+  "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#b22222",
   "background_color": "#ffffff"
