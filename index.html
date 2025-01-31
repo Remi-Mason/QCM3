@@ -41,12 +41,33 @@
            2. Appliquer la police au titre.
            =========================== */
         h2 {
-            font-family: "Vacaciones Outline", Arial, sans-serif;
-            font-size: 60px;
-            font-weight: normal; /* La police Outline est déjà "bold" par aspect visuel */
-            color: white;
-            text-shadow: 1.5px 1.5px 0 black;
-        }
+    font-family: "Vacaciones Outline", Arial, sans-serif;
+    font-size: 60px;
+    font-weight: normal;
+    color: white;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black,
+                 3px 3px 5px red, -3px -3px 5px yellow;
+}
+    font-family: "Vacaciones Outline", Arial, sans-serif;
+    font-size: 60px;
+    font-weight: normal;
+    color: white;
+    text-shadow: 3px 3px 5px red, -3px -3px 5px yellow, 0px 0px 8px black;
+}
+    font-family: "Vacaciones Outline", Arial, sans-serif;
+    font-size: 60px;
+    font-weight: normal;
+    color: white;
+    text-shadow: 3px 3px 5px red, -3px -3px 5px yellow;
+}
+    font-family: "Vacaciones Outline", Arial, sans-serif;
+    font-size: 60px;
+    font-weight: normal; /* La police Outline est déjà "bold" par aspect visuel */
+    background: linear-gradient(to right, red, yellow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: white;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+}
         .question {
             font-size: 20px;
             margin-bottom: 10px;
@@ -98,20 +119,50 @@
             border: none;
             border-radius: 5px;
             text-shadow: 1px 1px 2px black;
+            transition: transform 0.1s ease-in-out;
+        }
+
+            #validateBtn:active {
+            transform: scale(0.9);
+        }
+        
+        #startBtn:active {
+            transform: scale(0.9);
+        } {
+            display: block;
+            margin: 20px auto;
+            padding: 8px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            background: linear-gradient(to top, black, gray);
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            text-shadow: 1px 1px 2px black;
+			transition: transform 0.1s ease-in-out;
         }
         #restartBtn {
+    animation: pulseRestart 1.5s infinite alternate;
+     /* Ajout d'une animation de pulsation */
             display: none;
             margin: 20px auto;
             padding: 12px 18px;
             font-size: 18px;
+			font-weight: bold;
             cursor: pointer;
-            width: 90%;
-            max-width: 300px;
+            width: 50%;
+            max-width: 200px;
             background-color: white;
-            color: #b22222;
+            color: black;
             border: none;
             border-radius: 5px;
-            text-shadow: 1px 1px 2px black;
+            text-shadow: 1px 1px 2px deepskyblue;
+            transition: transform 0.1s ease-in-out;
+        }
+
+            #restartBtn:active {
+            transform: scale(0.9);
         }
 
         /* ===========================
@@ -128,11 +179,225 @@
             animation: elasticCycle 11s ease-in-out infinite;
             display: inline-block;
         }
-    </style>
+    .title-container {
+    position: relative;
+    display: inline-block;
+	top: 15px;
+}
+
+.title-container::before {
+    content: "";
+    position: absolute;
+    top: -28px;
+    left: 0;
+    width: 100%;
+    height: 80%;
+    background: url('https://i.imgur.com/gpSA7Hl.gif') no-repeat center center;
+    background-size: cover;
+    opacity: 0.5;
+    z-index: 0;
+}
+.gif-background {
+    position: relative;
+    display: block;
+    font-size: 20px;
+    padding: 5px;
+    font-weight: bold;
+    text-shadow: 2px 2px 1px black;
+}
+
+.gif-background::before {
+    content: "";
+    position: absolute;
+    top:  0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.imgur.com/Aotlphv.gif') no-repeat center center;
+    background-size: cover;
+    opacity: 0.5;
+    z-index: -1;
+}
+@keyframes pulse {
+    0%,
+	
+    60% {
+        transform: scale(1.3);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+}
+@keyframes shake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+}
+
+.shaking-image {
+    animation: shake 0.5s 2;
+}
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+}
+
+.shaking-image {
+    animation: shake 0.5s 2;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+}
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+}
+
+.shaking-image {
+    animation: shake 1s ease-in-out infinite;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+    animation-delay: 1s;
+}
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+}
+
+.shaking-image {
+    animation: shake 0.5s 2;
+}
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+}
+
+.shaking-image {
+    animation: shake 1.5s ease-in-out infinite alternate;
+}
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+}
+
+.shaking-image {
+    animation: shake 0.5s 2;
+    animation-delay: 1.5s; /* Pause de 2 secondes entre chaque tremblement */
+}
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.shaking-image {
+    animation: shake 0.5s 2;
+}
+@keyframes pulseRestart {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+    }
+    50% {
+        transform: scale(1.08);
+        box-shadow: 0 0 20px rgba(0, 191, 255, 0.9);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+    }
+}
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.9);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+    }
+}
+@keyframes fastShake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-2px, -2px); }
+    20% { transform: translate(2px, 2px); }
+    30% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    50% { transform: translate(-1px, -1px); }
+    60% { transform: translate(1px, 1px); }
+    70% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+    90% { transform: translate(0px, 0px); }
+}
+
+.shaking-fast {
+    animation: fastShake 0.3s infinite;
+}
+@keyframes alternateShake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    15% { transform: translate(-2px, 3px) rotate(-2deg); }
+    30% { transform: translate(3px, -2px) rotate(2deg); }
+    45% { transform: translate(-3px, 2px) rotate(-2deg); }
+    60% { transform: translate(2px, -3px) rotate(2deg); }
+    75% { transform: translate(-1px, 1px) rotate(-1deg); }
+    90% { transform: translate(1px, -1px) rotate(1deg); }
+}
+
+.alternate-shake {
+    animation: alternateShake 0.4s ;
+}
+</style>
     <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
     <audio id="startSound" src="audio/startSound.mp3" preload="auto"></audio>
     <!-- Son pour score parfait -->
     <audio id="perfectScoreSound" src="audio/perfectScore.mp3" preload="auto"></audio>
+	<!-- Son pour score imparfait -->
+    <audio id="imperfectScoreSound" src="audio/imperfectScore.mp3" preload="auto"></audio>
     <!-- Icônes pour favicon -->
 <link rel="icon" type="image/png" sizes="16x16" href="favicon.png?v=6">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=6">
@@ -148,26 +413,39 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#b22222">
 
+<audio id="correctAnswerSound" src="audio/correct.mp3" preload="auto"></audio>
+    <audio id="wrongAnswerSound" src="audio/wrong.mp3" preload="auto"></audio>
+<audio id="correctAnswerSound1" src="audio/correct1.mp3" preload="auto"></audio>
+    <audio id="correctAnswerSound2" src="audio/correct2.mp3" preload="auto"></audio>
+    <audio id="correctAnswerSound3" src="audio/correct3.mp3" preload="auto"></audio>
 </head>
 <body>
     <div class="container" id="welcomeScreen">
-        <h2 class="elastic">Q.C.M  S.S.I.A.P 1</h2>
-		<p>Édition: Le Feu Dans Ta Face !</p>
-        <p>🔥 Cliquez sur le bouton ci-dessous pour commencer le test. 🔥</p>
+        <div class="title-container">
+    <h2 class="elastic" style="position: absolute; color: white; text-shadow: none; z-index: 2; width: 100%;">Q.C.M S.S.I.A.P 1</h2>
+    <h2 class="elastic" style="background: linear-gradient(to right, red, yellow); -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; z-index: 1;">Q.C.M S.S.I.A.P 1</h2>
+</div>
+        <p style='margin-top: -20px;'><span style='font-family: Arial Black; font-weight: bold; color: black; text-shadow: 1px 1px 1px white;'>Édition:</span></p>
+        <img src='https://i.imgur.com/vLiU9s3.png' alt='Illustration' style='max-width: 30%; height: auto; margin-bottom: 10px;'>
+        <br>
+        <button id="muteBtn" onclick="toggleMute()">🔊 Mute</button>
+      
+        <p style='font-size: 14px;'><span style='font-family: Arial Black; text-shadow: 1px 1px 1px black;'>🔥 Cliquez sur le bouton ci-dessous pour commencer le test. 🔥</p>
         <button id="startBtn" onclick="startQuiz()">Commencer</button>
     </div>
     
     <div class="container" id="quizContainer" style="display: none;">
+        <div id="progress">Question <span id='currentQuestion'>1</span> / <span id='totalQuestions'></span></div>
         <div id="quiz"></div>
         <button id="validateBtn" onclick="submitAnswer()">Valider</button>
         <div id="result"></div>
-        <button id="restartBtn" onclick="restartQuiz()">Recommencer</button>
+        <button id="restartBtn" onclick="restartQuiz()">RECOMMENCER</button>
     </div>
     
     <script>
         const questions = [
             {
-                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Sur quel feu peut-on utiliser un extincteur à eau pulvérisée avec additif (A.F.F.F):</span>",
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'><span class='gif-background'>1. Sur quel feu peut-on utiliser un extincteur à eau pulvérisée avec additif (A.F.F.F):</span></span>",
                 options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe C</span>",
@@ -179,7 +457,7 @@
 				         "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>"],
             },
             {
-                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Sur quel feu peut-on utiliser un extincteur CO2:</span>",
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'><span class='gif-background'>2. Sur quel feu peut-on utiliser un extincteur CO2:</span>",
                 options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe C</span>",
@@ -188,7 +466,7 @@
                 answer: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>"],
             },
             {
-                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Sur quel feu peut-on utiliser un extincteur à eau pulvérisée:</span>",
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'><span class='gif-background'>3. Sur quel feu peut-on utiliser un extincteur à eau pulvérisée:</span>",
                 options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe C</span>",
@@ -204,17 +482,27 @@
 let score = 0;
 
         function startQuiz() {
+    // Lecture du son au clic sur 'Commencer'
+    const audio = document.getElementById('startSound');
+    if(audio){
+        audio.play().catch(err => console.log("Lecture audio bloquée :", err));
+    }
+    
+    setTimeout(() => {
+    document.getElementById("totalQuestions").textContent = questions.length;
             // Lecture du son au clic sur 'Commencer'
             const audio = document.getElementById('startSound');
             if(audio){
                 audio.play().catch(err => console.log("Lecture audio bloquée :", err));
             }
-            document.getElementById("welcomeScreen").style.display = "none";
-            document.getElementById("quizContainer").style.display = "block";
-            loadQuiz();
+                    document.getElementById("welcomeScreen").style.display = "none";
+                    document.getElementById("quizContainer").style.display = "block";
+                    loadQuiz();
+    }, 1000); // Délai de 1 seconde avant de lancer le quiz
         }
 
         function loadQuiz() {
+    document.getElementById("currentQuestion").textContent = currentQuestionIndex + 1;
             const quizContainer = document.getElementById("quiz");
             quizContainer.innerHTML = "";
             document.getElementById("validateBtn").style.display = "block";
@@ -222,7 +510,7 @@ let score = 0;
             const q = questions[currentQuestionIndex];
             const questionDiv = document.createElement("div");
             questionDiv.classList.add("question");
-            questionDiv.innerHTML = `<p><span style='font-weight: bold; text-shadow: 2px 2px 1px black;'>${currentQuestionIndex + 1}.</span> <span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>${q.question}</span></p>`;
+            questionDiv.innerHTML = `<p><span style='display: none;'>${currentQuestionIndex + 1}.</span> <span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>${q.question}</span></p>`;
 
             // Affichage des choix (A, B, C, D, E, F)
             const letters = ["A","B","C","D","E","F"];
@@ -253,17 +541,32 @@ let score = 0;
 
             // Bonne ou mauvaise réponse
             if (Array.isArray(correctAnswer) && selectedOptions.every(opt => correctAnswer.includes(opt.value)) && selectedOptions.length === correctAnswer.length) {
+    const correctSounds = [
+        document.getElementById('correctAnswerSound1'),
+        document.getElementById('correctAnswerSound2'),
+        document.getElementById('correctAnswerSound3')
+    ];
+    let correctSoundIndex = (currentQuestionIndex % correctSounds.length);
+    const correctSound = correctSounds[correctSoundIndex];
+    if(correctSound){
+        correctSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+    }
                 score++;
                 answerElement.innerHTML = `
-                    <span style='color: white; font-weight: bold; background-color: #333333; padding: 5px; border-radius: 5px;'>
-                        Bonne réponse ! ✅
+                    <p style='margin-top: 17px; display: inline-block; animation: pulse 1s; animation-delay: 0s; ease-in-out linear;'><span style='font-weight: bold; background-color: #333333; border: 3px solid #00FF00; padding: 5px; border-radius: 10px;'>
+                         <img src='https://i.imgur.com/NeEtToB.png' alt='Bonne réponse' style='height: 30px; vertical-align: middle; margin-top: -6px;'> Bonne réponse</span></p>
                     </span>
                 `;
             } else {
-                answerElement.innerHTML = `
-                    <span style="color: #FF0000; font-weight: bold; padding: 5px; border-radius: 5px;"><span style='background-color: yellow; border: 3px solid red; padding: 5px; border-radius: 5px;'>❌</span></span>
-                    <span style='background-color: blue; color: white; padding: 5px; border-radius: 5px;'>
-                        La bonne réponse est :
+                const wrongSound = document.getElementById('wrongAnswerSound');
+    if(wrongSound){
+        wrongSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+    }
+    answerElement.innerHTML = `
+    <span style="color: #FF0000; font-weight: bold; padding: 5px; border-radius: 5px;"><img src='https://i.imgur.com/qiazPAG.png' class='alternate-shake' class='shaking-fast' alt='Mauvaise réponse' style='height: 60px; vertical-align: middle;'></span>
+                    <span style="color: #00FF00; padding: 5px; border-radius: 5px; display: inline-block; margin-top: 30px;">
+                        Réponse:
+						 <br>
                     </span> ${correctAnswer}
                 `;
             }
@@ -277,7 +580,14 @@ let score = 0;
                 if (currentQuestionIndex < questions.length) {
                     loadQuiz();
                 } else {
-                    document.getElementById("quiz").innerHTML = `<p>Quiz terminé ! 🎉<br>Score : ${score} / ${questions.length}</p>`;
+                    if(score === questions.length) {
+    stopAllSounds();
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='shaking-image' alt='Félicitations !' style='max-width: 50%; height: auto; margin-top: 20px; margin-left: 10px;'>
+<p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -5px;'>Score : ${score} / ${questions.length}</p>`;
+} else {
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' style='max-width: 60%; height: auto; margin-top: 20px; margin-left: 10px;'>
+    <p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -10px;'>Score : ${score} / ${questions.length}</p>`;
+}
 
                     // Lecture du son si le score est parfait
                     if(score === questions.length) {
@@ -285,26 +595,54 @@ let score = 0;
                         if(perfectSound){
                             perfectSound.play().catch(err => console.log("Lecture audio bloquée :", err));
                         }
+					} else {
+                       stopAllSounds();
+    const imperfectSound = document.getElementById('imperfectScoreSound');
+                      if(imperfectSound){
+                         imperfectSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+    }
                     }
                     document.getElementById("restartBtn").style.display = "block";
                 }
             }, nextDelay);
         }
 
-        function restartQuiz() {
+        function stopAllSounds() {
+    const allSounds = document.querySelectorAll('audio');
+    allSounds.forEach(sound => {
+        sound.pause();
+        sound.currentTime = 0;
+    });
+}
+
+function restartQuiz() {
+    document.getElementById("restartBtn").style.display = "none";
     // Interruption éventuelle du son parfait
     const perfectSound = document.getElementById('perfectScoreSound');
     if (perfectSound) {
         perfectSound.pause();
         perfectSound.currentTime = 0;
     }
-
+	// Interruption éventuelle du son imparfait
+const imperfectSound = document.getElementById('imperfectScoreSound');
+if (imperfectSound) {
+    imperfectSound.pause();
+    imperfectSound.currentTime = 0;
+}
     currentQuestionIndex = 0;
     score = 0;
-    document.getElementById("restartBtn").style.display = "none";
-    document.getElementById("quiz").innerHTML = "";
-    loadQuiz();
+    
+    // Cacher le quiz et afficher l'écran d'accueil
+    document.getElementById("quizContainer").style.display = "none";
+    document.getElementById("welcomeScreen").style.display = "block";
 }
-    </script>
+    function toggleMute() {
+    const allSounds = document.querySelectorAll('audio');
+    allSounds.forEach(sound => {
+        sound.muted = !sound.muted;
+    });
+    document.getElementById("muteBtn").textContent = allSounds[0].muted ? "🔇 Unmute" : "🔊 Mute";
+}
+</script>
 </body>
 </html>
