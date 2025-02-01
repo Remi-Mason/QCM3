@@ -530,7 +530,7 @@ let score = 0;
                 score++;
                 answerElement.innerHTML = `
                     <p style='margin-top: 17px; display: inline-block; animation: pulse 1s; animation-delay: 0s; ease-in-out linear;'><span style='font-weight: bold; background-color: #333333; border: 3px solid #00FF00; padding: 5px; border-radius: 10px;'>
-                         <img src='https://i.imgur.com/NeEtToB.png' alt='Bonne réponse' style='height: 30px; vertical-align: middle; margin-top: -6px;'> Bonne réponse</span></p>
+                         <img src='https://i.imgur.com/NeEtToB.png' alt='Bonne réponse' style='height: 30px; vertical-align: middle; margin-top: -6px;'> Bonne réponse !</span></p>
                     </span>
                 `;
             } else {
@@ -558,7 +558,7 @@ let score = 0;
                 } else {
                     if(score === questions.length) {
     stopAllSounds();
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='shaking-image' alt='Félicitations !' style='max-width: 50%; height: auto; margin-top: 20px; margin-left: 10px;'>
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='shaking-image' alt='Félicitations !' style='max-width: 50%; class='responsive' height: auto; margin-top: 20px; margin-left: 10px;'>
 <p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -5px;'>Score : ${score} / ${questions.length}</p>`;
 } else {
     document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' style='max-width: 60%; height: auto; margin-top: 20px; margin-left: 10px;'>
