@@ -558,7 +558,7 @@ let score = 0;
                 } else {
                     if(score === questions.length) {
     stopAllSounds();
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='shaking-image' alt='Félicitations !' style='max-width: 50%; class='responsive' height: auto; margin-top: 20px; margin-left: 10px;'>
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='shaking-image responsive' alt='Félicitations !' style='max-width: 50%; height: auto; margin-top: 20px; margin-left: 10px;'>
 <p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -5px;'>Score : ${score} / ${questions.length}</p>`;
 } else {
     document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' style='max-width: 60%; height: auto; margin-top: 20px; margin-left: 10px;'>
