@@ -374,31 +374,31 @@
         box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
     }
 }
-/* 🌍 Ajustements spécifiques pour la version mobile */
 @media screen and (max-width: 768px) {
     .option {
-        flex-wrap: nowrap; /* Assure que le texte reste bien à droite de la case */
-        align-items: center; /* Garde un bon alignement */
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 100%;
     }
 
     .option input[type="checkbox"] {
-        width: 32px; /* Agrandit légèrement la case sur mobile */
+        width: 32px;
         height: 32px;
+        flex-shrink: 0;
+        align-self: flex-start;
+        margin-right: 10px;
     }
 
     .option span {
-        display: inline-block;
-        max-width: calc(100% - 50px);
+        display: block;
         text-align: left;
+        max-width: calc(100% - 50px);
+        line-height: 1.4;
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
-}
-.option span {
-    display: inline-block;
-    text-align: left;
-    max-width: calc(100% - 50px); /* Laisse assez de place aux checkboxes */
-    word-spacing: 2px; /* Ajoute un espacement naturel entre les mots */
-    line-height: 1.4; /* Rend la lecture plus agréable */
-    white-space: normal; /* Permet les retours à la ligne naturels */
 }
 
 </style>
