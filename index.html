@@ -588,13 +588,29 @@ let score = 0;
                 } else {
                     if(score === questions.length) {
     stopAllSounds();
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='bounce-shake responsive' alt='Félicitations !' style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 15px; margin-left: 10px;'>
-<p style='font-size: 24px; font-weight: bold; color: #00FF00; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 10px;'>Score : ${score} / ${questions.length}</p>
-<img src='https://i.imgur.com/fuzmAwx.gif' alt='Bravo !' style='max-width: 50%; height: auto; margin-bottom: -20px;'>`;
+    const perfectGifs = [
+    'https://i.imgur.com/CxateYA.gif',
+    'https://i.imgur.com/65KK0We.gif'
+];
+const randomPerfectGif = perfectGifs[Math.floor(Math.random() * perfectGifs.length)];
+
+document.getElementById("quiz").innerHTML = `
+    <img src='https://i.imgur.com/FY9Nelt.png' class='bounce-shake responsive' alt='Félicitations !' style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 15px; margin-left: 10px;'>
+    <p style='font-size: 24px; font-weight: bold; color: #00FF00; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 10px;'>Score : ${score} / ${questions.length}</p>
+    <img src='${randomPerfectGif}' alt='Bravo !' style='max-width: 50%; height: auto; margin-top: 30px; margin-bottom: -10px;'>
+`;
 } else {
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' class="breathe responsive" style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 20px; margin-left: 10px;'>
-<p style='font-size: 24px; font-weight: bold; color: #FF0000; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 5px;'>Score : ${score} / ${questions.length}</p>
-<img src='https://i.imgur.com/flUIu4F.gif' alt='Essayez encore !' style='max-width: 50%; height: auto; margin-top: 15px; margin-bottom: -20px;'>`;
+    const imperfectGifs = [
+    'https://i.imgur.com/flUIu4F.gif',
+    'https://i.imgur.com/cUZ6a1J.gif'
+];
+const randomImperfectGif = imperfectGifs[Math.floor(Math.random() * imperfectGifs.length)];
+
+document.getElementById("quiz").innerHTML = `
+    <img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' class="breathe responsive" style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 20px; margin-left: 10px;'>
+    <p style='font-size: 24px; font-weight: bold; color: #FF0000; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 5px;'>Score : ${score} / ${questions.length}</p>
+    <img src='${randomImperfectGif}' alt='Essayez encore !' style='max-width: 50%; height: auto; margin-bottom: 5px; margin-top: 20px;'>
+`;
 }
 
                     // Lecture du son si le score est parfait
