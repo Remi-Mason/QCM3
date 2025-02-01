@@ -260,8 +260,38 @@
 }
 
 .shaking-image {
-    animation: shake 0.5s 2;
+    animation: shake 0.5s infinite;
 
+}
+@keyframes alternateShake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    15% { transform: translate(-2px, 3px) rotate(-2deg); }
+    30% { transform: translate(3px, -2px) rotate(2deg); }
+    45% { transform: translate(-3px, 2px) rotate(-2deg); }
+    60% { transform: translate(2px, -3px) rotate(2deg); }
+    75% { transform: translate(-1px, 1px) rotate(-1deg); }
+    90% { transform: translate(1px, -1px) rotate(1deg); }
+}
+
+.alternate-shake {
+    animation: alternateShake 0.4s ;
+}
+@keyframes bounceShake {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    10% { transform: translate(-2px, -2px) rotate(-2deg); }
+    20% { transform: translate(2px, 2px) rotate(2deg); }
+    30% { transform: translate(-2px, 2px) rotate(-2deg); }
+    40% { transform: translate(2px, -2px) rotate(2deg); }
+    50% { transform: translate(0, 0) scale(1.1); } /* Légère extension */
+    60% { transform: translate(-1px, -1px) rotate(-1deg); }
+    70% { transform: translate(1px, 1px) rotate(1deg); }
+    80% { transform: translate(-1px, 1px) rotate(-1deg); }
+    90% { transform: translate(1px, -1px) rotate(1deg); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+.bounce-shake {
+    animation: bounceShake 0.6s 1;
 }
 @keyframes pulseRestart {
     0% {
@@ -285,36 +315,6 @@
         transform: scale(1);
         box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
     }
-}
-@keyframes fastShake {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-2px, -2px); }
-    20% { transform: translate(2px, 2px); }
-    30% { transform: translate(-2px, 2px); }
-    40% { transform: translate(2px, -2px); }
-    50% { transform: translate(-1px, -1px); }
-    60% { transform: translate(1px, 1px); }
-    70% { transform: translate(-1px, 1px); }
-    80% { transform: translate(1px, -1px); }
-    90% { transform: translate(0px, 0px); }
-}
-
-.shaking-fast {
-    animation: fastShake 0.3s infinite;
-}
-@keyframes alternateShake {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    15% { transform: translate(-2px, 3px) rotate(-2deg); }
-    30% { transform: translate(3px, -2px) rotate(2deg); }
-    45% { transform: translate(-3px, 2px) rotate(-2deg); }
-    60% { transform: translate(2px, -3px) rotate(2deg); }
-    75% { transform: translate(-1px, 1px) rotate(-1deg); }
-    90% { transform: translate(1px, -1px) rotate(1deg); }
-}
-
-.alternate-shake {
-    animation: alternateShake 0.4s ;
-}
 @keyframes breathe {
     0% {
         transform: scale(1);
@@ -576,10 +576,10 @@ let score = 0;
                 } else {
                     if(score === questions.length) {
     stopAllSounds();
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='shaking-image' alt='Félicitations !' style='max-width: 50%; height: auto; margin-top: 20px; margin-left: 10px;'>
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='bounce-shake responsive' alt='Félicitations !' style='max-width: 50%; height: auto; margin-top: 20px; margin-left: 10px;'>
 <p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -5px;'>Score : ${score} / ${questions.length}</p>`;
 } else {
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' style='max-width: 60%; height: auto; margin-top: 20px; margin-left: 10px;'>
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' class="breathe" style='max-width: 60%; height: auto; margin-top: 20px; margin-left: 10px;'>
     <p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -10px;'>Score : ${score} / ${questions.length}</p>`;
 }
 
