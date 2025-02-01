@@ -127,43 +127,29 @@
             
         }
 
-        #validateBtn {
-            display: block;
-            max-width: 160px;
-            height: 60px;
-            margin: 20px auto;
-            padding: 4px 15px;
-            font-size: 18px;
-            cursor: pointer;
-            background: linear-gradient(to top, red, orange);
-            color: white;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            text-shadow: 1px 1px 2px black;
-            transition: transform 0.1s ease-in-out;
-            border: 3px solid #FF0000;
-        }
-            display: block;
-			max-width: 160px;
-			height: 60px;
-            margin: 20px auto;
-            padding: 4px 15px;
-            font-size: 18px;
-            cursor: pointer;
-            background: linear-gradient(to top, black, gray);
-            color: white;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            text-shadow: 1px 1px 2px black;
-            transition: transform 0.1s ease-in-out;
-			border: 3px solid #00FF00;
-        }
+#validateBtn {
+    display: block;
+    max-width: 160px;
+    height: 60px;
+    margin: 20px auto;
+    padding: 4px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    background: linear-gradient(to top, black, gray);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    text-shadow: 1px 1px 2px black;
+    transition: transform 0.1s ease-in-out;
+    border: 3px solid white; /* Garde une seule définition */
+}
 
-            #validateBtn:active {
-            transform: scale(0.9);
-        }
+/* Effet de pression au clic */
+#validateBtn:active {
+    transform: scale(0.9) !important;
+}
+
         
         #startBtn:active {
             transform: scale(0.9);
@@ -352,6 +338,7 @@
 .glow-border {
     animation: glowEffect 1.5s infinite alternate;
 }
+
 @media screen and (max-width: 768px) {
     img.responsive {
         max-width: 50% !important; /* Augmente la taille sur mobile */
@@ -374,6 +361,18 @@
     margin-top: -9px !important; /* Ajuste cette valeur pour descendre l’image sur mobile */
     vertical-align: middle;
 }
+}
+
+@keyframes glowEffectBlue {
+    0% {
+        box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    }
+    50% {
+        box-shadow: 0 0 20px #00FFFF, 0 0 40px #00FFFF;
+    }
+    100% {
+        box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
+    }
 }
 
 </style>
@@ -473,6 +472,14 @@
                 answer:  ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe A</span>",
 				          "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe B</span>",
 						  "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>Classe C</span>"],
+            },
+			          {
+                question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'><span class='gif-background'>5. Qu'est-ce qu'une main courante:</span>",
+                options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>le cahier de consignes du service sécurité</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on enregistre tous les <br> événement de chaque journée</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on archive les rapports <br> des bureaux de contrôles</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>aucune des réponses</span>"],
+                answer:  ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on enregistre tous les <br> événement de chaque journée</span>"],
             }
 			
         ];
@@ -563,10 +570,10 @@ let score = 0;
     }
     answerElement.innerHTML = `
     <span style="color: #FF0000; font-weight: bold; padding: 5px; border-radius: 5px;"><img src='https://i.imgur.com/qiazPAG.png' class='alternate-shake' alt='Mauvaise réponse' style='height: 60px; vertical-align: middle;'></span>
-                    <span style="color: #00FF00; padding: 5px; border-radius: 5px; display: inline-block; margin-top: 30px;">
+                    <span style="color: black; padding: 5px; border-radius: 5px; display: inline-block; margin-top: 30px; text-shadow: 2px 2px 2px white;">
                         Réponse:
 						 <br>
-                    </span> ${correctAnswer}
+                    </span> ${correctAnswer.join(" + ")}
                 `;
             }
             answerElement.style.display = "block";
@@ -581,11 +588,13 @@ let score = 0;
                 } else {
                     if(score === questions.length) {
     stopAllSounds();
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='bounce-shake responsive' alt='Félicitations !' style='max-width: 50%; height: auto; margin-top: 20px; margin-left: 10px;'>
-<p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -5px;'>Score : ${score} / ${questions.length}</p>`;
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/FY9Nelt.png' class='bounce-shake responsive' alt='Félicitations !' style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 15px; margin-left: 10px;'>
+<p style='font-size: 24px; font-weight: bold; color: #00FF00; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 10px;'>Score : ${score} / ${questions.length}</p>
+<img src='https://i.imgur.com/fuzmAwx.gif' alt='Bravo !' style='max-width: 50%; height: auto; margin-bottom: -20px;'>`;
 } else {
-    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' class="breathe responsive" style='max-width: 60%; height: auto; margin-top: 20px; margin-left: 10px;'>
-    <p style='font-size: 24px; font-weight: bold; color: white; text-shadow: 2px 2px 2px black; margin-top: -10px;'>Score : ${score} / ${questions.length}</p>`;
+    document.getElementById("quiz").innerHTML = `<img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' class="breathe responsive" style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 20px; margin-left: 10px;'>
+<p style='font-size: 24px; font-weight: bold; color: #FF0000; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 5px;'>Score : ${score} / ${questions.length}</p>
+<img src='https://i.imgur.com/flUIu4F.gif' alt='Essayez encore !' style='max-width: 50%; height: auto; margin-top: 15px; margin-bottom: -20px;'>`;
 }
 
                     // Lecture du son si le score est parfait
@@ -643,6 +652,12 @@ if (imperfectSound) {
     });
     document.getElementById("muteBtn").textContent = allSounds[0].muted ? "🔇 Unmute" : "🔊 Mute";
 }
+document.getElementById("startBtn").addEventListener("click", function() {
+    this.style.animation = "glowEffectBlue 1.5s infinite alternate";
+});
+document.getElementById("restartBtn").addEventListener("click", function() {
+    document.getElementById("startBtn").style.animation = "glowEffect 1.5s infinite alternate";
+});
 </script>
 </body>
 </html>
