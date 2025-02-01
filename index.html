@@ -358,10 +358,10 @@
         max-width: 100% !important; /* Agrandit l'image sur mobile */
     }
 }
-		@media screen and (max-width: 768px) {
-    img.responsive[src='https://i.imgur.com/NeEtToB.png'] {
-        max-width: -100% !important; /* Agrandit l'image sur mobile */
-		margin-top: 10px;
+    @media screen and (max-width: 768px) {
+    img.neet-image {
+        max-width: 30% !important; /* Ajuste la taille uniquement sur mobile */
+        margin-top: 10px; /* Décale l'image vers le bas */
     }
 }
 
@@ -542,7 +542,7 @@ let score = 0;
                 score++;
                 answerElement.innerHTML = `
                     <p style='margin-top: 17px; display: inline-block; animation: pulse 1s; animation-delay: 0s; ease-in-out linear;'><span style='font-weight: bold; background-color: #333333; border: 3px solid #00FF00; padding: 5px; border-radius: 10px;'>
-                         <img src='https://i.imgur.com/NeEtToB.png' alt='Bonne réponse' class="responsive" style='height: 30px; margin-top: -6px; margin-bottom: -6.5px;'> Bonne réponse !</span></p>
+                         <img src='https://i.imgur.com/NeEtToB.png' alt='Bonne réponse' class="neet-image" style='height: 30px; margin-top: -6px; margin-bottom: -6.5px;'> Bonne réponse !</span></p>
                     </span>
                 `;
             } else {
