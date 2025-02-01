@@ -374,6 +374,27 @@
         box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF;
     }
 }
+/* ✅ Ajustements pour mobile */
+@media screen and (max-width: 768px) {
+    .option {
+        align-items: flex-start; /* Assure l'alignement correct */
+        flex-wrap: wrap; /* Permet aux réponses longues d'aller sur plusieurs lignes */
+    }
+
+    .option input[type="checkbox"] {
+        width: 32px; /* Ajuste la taille sur mobile */
+        height: 32px;
+        align-self: flex-start; /* Aligne correctement la checkbox */
+    }
+
+    .option span {
+        display: inline-block;
+        margin-left: 5px;
+        white-space: normal; /* Autorise le texte à aller à la ligne */
+        text-align: left; /* S'assure que le texte est bien aligné */
+        max-width: calc(100% - 50px);
+    }
+}
 
 </style>
     <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
