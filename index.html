@@ -358,10 +358,9 @@
         max-width: 100% !important; /* Agrandit l'image sur mobile */
     }
 }
-    @media screen and (max-width: 768px) {
-    img.neet-image[src='https://i.imgur.com/NeEtToB.png'] {
-        max-width: 60% !important; /* Ajuste la taille uniquement sur mobile */
-        margin-top: 20px; /* Décale l'image vers le bas */
+@media screen and (max-width: 768px) {
+    img.neet-image {
+        margin-top: 20px !important; /* Ajuste cette valeur pour descendre l’image */
     }
 }
 
@@ -551,7 +550,7 @@ let score = 0;
         wrongSound.play().catch(err => console.log("Lecture audio bloquée :", err));
     }
     answerElement.innerHTML = `
-    <span style="color: #FF0000; font-weight: bold; padding: 5px; border-radius: 5px;"><img src='https://i.imgur.com/qiazPAG.png' class='alternate-shake' class='shaking-fast' alt='Mauvaise réponse' style='height: 60px; vertical-align: middle;'></span>
+    <span style="color: #FF0000; font-weight: bold; padding: 5px; border-radius: 5px;"><img src='https://i.imgur.com/qiazPAG.png' class='alternate-shake' alt='Mauvaise réponse' style='height: 60px; vertical-align: middle;'></span>
                     <span style="color: #00FF00; padding: 5px; border-radius: 5px; display: inline-block; margin-top: 30px;">
                         Réponse:
 						 <br>
