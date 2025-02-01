@@ -352,15 +352,6 @@
         max-width: 50% !important; /* Augmente la taille sur mobile */
         height: auto !important;
     }
-	@media screen and (max-width: 768px) {
-    .mute-button {
-        font-size: 24px; /* Augmente la taille du texte */
-        padding: 12px 20px; /* Augmente l'espace interne */
-        width: 120px; /* Augmente la largeur */
-        height: 50px; /* Augmente la hauteur */
-        border-radius: 10px; /* Arrondi les bords */
-    }
-}
 
 </style>
     <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
@@ -402,7 +393,7 @@
         <img src='https://i.imgur.com/vLiU9s3.png' alt='Illustration' class='responsive' style='max-width: 30%; height: auto; margin-bottom: 10px;'>
 		<img src='https://i.imgur.com/wg5uaTR.gif' alt='Illustration' style='max-width: 30%; height: auto; margin-bottom: 10px;'>
         <br>
-       <button id="muteBtn" class="mute-button" onclick="toggleMute()">🔊 Mute</button>
+       <button id="muteBtn" style="margin-bottom: 15px;" class="responsive" onclick="toggleMute() ">🔊 Mute</button>
         <br>
         <button id="startBtn" class="glow-border" onclick="startQuiz()"><img src='https://i.imgur.com/VpouE4x.png' alt='Illustration' style='max-width: 70%; height: auto; margin-bottom: 30px;'></button>
     </div>
