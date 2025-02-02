@@ -419,6 +419,14 @@
 	<!-- Son pour score imparfait -->
     <audio id="imperfectScoreSound" src="audio/imperfectScore.mp3" preload="auto"></audio>
     <!-- Icônes pour favicon -->
+	<audio id="gifSound" src="audio/KenWin.mp3" preload="auto"></audio>
+	<audio id="newGifSound" src="audio/RyuWin.mp3" preload="auto"></audio>
+	<audio id="otherGifSound" src="audio/Bison.mp3" preload="auto"></audio>
+	<audio id="correctAnswerSound" src="audio/correct.mp3" preload="auto"></audio>
+    <audio id="wrongAnswerSound1" src="audio/wrong1.mp3" preload="auto"></audio>
+	<audio id="wrongAnswerSound2" src="audio/wrong2.mp3" preload="auto"></audio>
+    <audio id="correctAnswerSound1" src="audio/correct1.mp3" preload="auto"></audio>
+
 <link rel="icon" type="image/png" sizes="16x16" href="favicon.png?v=6">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon.png?v=6">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon.png?v=6">
@@ -432,12 +440,6 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#b22222">
-
-<audio id="correctAnswerSound" src="audio/correct.mp3" preload="auto"></audio>
-    <audio id="wrongAnswerSound" src="audio/wrong.mp3" preload="auto"></audio>
-<audio id="correctAnswerSound1" src="audio/correct1.mp3" preload="auto"></audio>
-    <audio id="correctAnswerSound2" src="audio/correct2.mp3" preload="auto"></audio>
-    <audio id="correctAnswerSound3" src="audio/correct3.mp3" preload="auto"></audio>
 </head>
 <body>
     <div class="container" id="welcomeScreen">
@@ -447,9 +449,9 @@
 </div>
         <img src='https://i.imgur.com/FNvbjRj.png' alt='Illustration' class='responsive' style='max-width: 30%; height: auto; margin-bottom: 10px;'>
 		<br>
-		<img src='https://i.imgur.com/hHACOCg.gif' alt='Illustration' style='max-width: 30%; height: auto; margin-bottom: 10px;'>
+		<img src='https://i.imgur.com/hHACOCg.gif' alt='Illustration' style='width: 15%; height: auto; margin-bottom: 10px;'>
         <img src='https://i.imgur.com/vLiU9s3.png' alt='Illustration' class='responsive' style='max-width: 30%; height: auto; margin-bottom: 10px;'>
-		<img src='https://i.imgur.com/wg5uaTR.gif' alt='Illustration' style='max-width: 30%; height: auto; margin-bottom: 10px;'>
+		<img src='https://i.imgur.com/wg5uaTR.gif' alt='Illustration' style='width: 15%; height: auto; margin-bottom: 10px;'>
         <br>
        <button id="muteBtn" style="margin-bottom: 15px;" class="responsive" onclick="toggleMute() ">🔊 Mute</button>
         <br>
@@ -522,6 +524,7 @@
 
         let currentQuestionIndex = 0;
 let score = 0;
+let gifSoundTimeout;
 
         function startQuiz() {
     // Lecture du son au clic sur 'Commencer'
@@ -584,9 +587,9 @@ let score = 0;
             // Bonne ou mauvaise réponse
             if (Array.isArray(correctAnswer) && selectedOptions.every(opt => correctAnswer.includes(opt.value)) && selectedOptions.length === correctAnswer.length) {
     const correctSounds = [
-        document.getElementById('correctAnswerSound1'),
-        document.getElementById('correctAnswerSound2'),
-        document.getElementById('correctAnswerSound3')
+        document.getElementById('correctAnswerSound1')
+
+
     ];
     let correctSoundIndex = (currentQuestionIndex % correctSounds.length);
     const correctSound = correctSounds[correctSoundIndex];
@@ -600,10 +603,14 @@ let score = 0;
                     </span>
                 `;
             } else {
-                const wrongSound = document.getElementById('wrongAnswerSound');
-    if(wrongSound){
-        wrongSound.play().catch(err => console.log("Lecture audio bloquée :", err));
-    }
+const wrongSounds = [
+    document.getElementById('wrongAnswerSound1'),
+    document.getElementById('wrongAnswerSound2')
+];
+const randomWrongSound = wrongSounds[Math.floor(Math.random() * wrongSounds.length)];
+if(randomWrongSound){
+    randomWrongSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+}
 answerElement.innerHTML = `
     <div style='text-align: center;'>
         <img src='https://i.imgur.com/qiazPAG.png' class='alternate-shake' alt='Mauvaise réponse' style='height: 60px; display: block; margin: 0 auto -5px;'>
@@ -624,32 +631,79 @@ answerElement.innerHTML = `
                 if (currentQuestionIndex < questions.length) {
                     loadQuiz();
                 } else {
-                    if(score === questions.length) {
+                   if(score === questions.length) {
     stopAllSounds();
     const perfectGifs = [
-    'https://i.imgur.com/CxateYA.gif',
-    'https://i.imgur.com/65KK0We.gif'
-];
-const randomPerfectGif = perfectGifs[Math.floor(Math.random() * perfectGifs.length)];
+    'https://i.imgur.com/ugmgx8S.gif',
+    'https://i.imgur.com/dWXEhoC.gif'
+    ];
+    const randomPerfectGif = perfectGifs[Math.floor(Math.random() * perfectGifs.length)];
 
-document.getElementById("quiz").innerHTML = `
-    <img src='https://i.imgur.com/FY9Nelt.png' class='bounce-shake responsive' alt='Félicitations !' style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 15px; margin-left: 10px;'>
-    <p style='font-size: 24px; font-weight: bold; color: #00FF00; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 10px;'>Score : ${score} / ${questions.length}</p>
-    <img src='${randomPerfectGif}' alt='Bravo !' style='max-width: 50%; height: auto; margin-top: 30px; margin-bottom: -10px;'>
-`;
+    // 🎵 Jouer un son en fonction du GIF sélectionné
+    if (randomPerfectGif === 'https://i.imgur.com/dWXEhoC.gif') {
+        gifSoundTimeout = setTimeout(() => {
+            const gifSound = document.getElementById("gifSound");
+            if (gifSound) {
+                gifSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+            }
+        }, 1500); 
+    }
+
+    if (randomPerfectGif === 'https://i.imgur.com/ugmgx8S.gif') {
+        gifSoundTimeout = setTimeout(() => {
+            const newGifSound = document.getElementById("newGifSound");
+            if (newGifSound) {
+                newGifSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+            }
+        }, 1500); 
+    }
+
+    document.getElementById("quiz").innerHTML = `
+        <img src='https://i.imgur.com/FY9Nelt.png' class='bounce-shake responsive' alt='Félicitations !' style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 15px; margin-left: 10px;'>
+        <p style='font-size: 24px; font-weight: bold; color: #00FF00; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 10px;'>Score : ${score} / ${questions.length}</p>
+        <img src='${randomPerfectGif}' alt='Bravo !' style='max-width: 50%; height: auto; margin-top: 30px; margin-bottom: -10px;'>
+    `;
+
 } else {
     const imperfectGifs = [
-    'https://i.imgur.com/flUIu4F.gif',
-    'https://i.imgur.com/cUZ6a1J.gif'
-];
-const randomImperfectGif = imperfectGifs[Math.floor(Math.random() * imperfectGifs.length)];
+        'https://i.imgur.com/flUIu4F.gif',
+        'https://i.imgur.com/cUZ6a1J.gif',
+        'https://i.imgur.com/q1HbOrG.gif',
+        'https://i.imgur.com/RlEPwxw.gif',
+        'https://i.imgur.com/TObmK2c.gif',
+        'https://i.imgur.com/BhhMQha.gif',
+        'https://i.imgur.com/tk6wao5.gif'
+    ];
+    const randomImperfectGif = imperfectGifs[Math.floor(Math.random() * imperfectGifs.length)];
 
-document.getElementById("quiz").innerHTML = `
-    <img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' class="breathe responsive" style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 20px; margin-left: 10px;'>
-    <p style='font-size: 24px; font-weight: bold; color: #FF0000; text-shadow: 2px 2px 2px black; margin-bottom: -20px; margin-top: 5px;'>Score : ${score} / ${questions.length}</p>
-    <img src='${randomImperfectGif}' alt='Essayez encore !' style='max-width: 50%; height: auto; margin-bottom: 5px; margin-top: 20px;'>
-`;
+    // 🎵 Jouer un son uniquement pour tk6wao5.gif
+    if (randomImperfectGif === 'https://i.imgur.com/tk6wao5.gif') {
+        gifSoundTimeout = setTimeout(() => {
+            const otherGifSound = document.getElementById("otherGifSound");
+            if (otherGifSound) {
+                otherGifSound.play().catch(err => console.log("Lecture audio bloquée :", err));
+            }
+        }, 1500);
+    }
+
+    // 🖼️ Création du contenu du quiz
+    document.getElementById("quiz").innerHTML = `
+        <img src='https://i.imgur.com/ccncgbR.png' alt='Essayez encore !' class="breathe responsive" 
+            style='max-width: 70%; height: auto; margin-bottom: -15px; margin-top: 20px; margin-left: 10px;'>
+        <p style='font-size: 24px; font-weight: bold; color: #FF0000; text-shadow: 2px 2px 2px black; 
+            margin-bottom: -20px; margin-top: 5px;'>Score : ${score} / ${questions.length}</p>
+        <img src='${randomImperfectGif}' alt='Essayez encore !' 
+            style='max-width: 50%; height: auto; margin-bottom: 5px; margin-top: 20px; 
+            ${randomImperfectGif === 'https://i.imgur.com/tk6wao5.gif' ? "margin-left: 50px; margin-bottom: -10px; margin-top: 30px;" : ""}
+			${randomImperfectGif === 'https://i.imgur.com/BhhMQha.gif' ? "margin-bottom: -10px; margin-top: 30px;" : ""}
+			${randomImperfectGif === 'https://i.imgur.com/TObmK2c.gif' ? "margin-bottom: -10px; margin-top: 30px;" : ""}
+			${randomImperfectGif === 'https://i.imgur.com/RlEPwxw.gif' ? "margin-bottom: -10px; margin-top: 30px;" : ""}
+			${randomImperfectGif === 'https://i.imgur.com/q1HbOrG.gif' ? "margin-bottom: -10px; margin-top: 30px;" : ""}
+			${randomImperfectGif === 'https://i.imgur.com/cUZ6a1J.gif' ? "margin-bottom: -10px; margin-top: 30px;" : ""}
+			${randomImperfectGif === 'https://i.imgur.com/flUIu4F.gif' ? "margin-bottom: -10px; margin-top: 30px;" : ""}'>
+    `;
 }
+
 
                     // Lecture du son si le score est parfait
                     if(score === questions.length) {
@@ -680,6 +734,26 @@ document.getElementById("quiz").innerHTML = `
 function restartQuiz() {
     document.getElementById("totalQuestions").textContent = questions.length;
     document.getElementById("restartBtn").style.display = "none";
+	// 🛑 Annule le délai des sons si "Recommencer" est cliqué avant qu'ils ne soient joués
+clearTimeout(gifSoundTimeout);
+
+// 🎵 Assure l'arrêt immédiat des sons parfaits
+const gifSound = document.getElementById("gifSound");
+if (gifSound) {
+    gifSound.pause();
+    gifSound.currentTime = 0;
+}
+
+const newGifSound = document.getElementById("newGifSound");
+if (newGifSound) {
+    newGifSound.pause();
+    newGifSound.currentTime = 0;
+}
+const otherGifSound = document.getElementById("otherGifSound");
+if (otherGifSound) {
+    otherGifSound.pause();
+    otherGifSound.currentTime = 0;
+}
     // Interruption éventuelle du son parfait
     const perfectSound = document.getElementById('perfectScoreSound');
     if (perfectSound) {
