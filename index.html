@@ -382,6 +382,7 @@
 }
 @media screen and (max-width: 768px) {
     .option { 
+	    font-size: 22px;
         display: flex;
         align-items: center; /* ✅ Assure l'alignement vertical */
         flex-wrap: nowrap; /* ✅ Garde le texte à côté de la case */
@@ -398,6 +399,7 @@
     }
 
     .option span {
+	    font-size: 20px;
         display: inline-block;
         text-align: left;
         vertical-align: middle; /* ✅ Assure que le texte reste bien centré */
@@ -602,13 +604,15 @@ let score = 0;
     if(wrongSound){
         wrongSound.play().catch(err => console.log("Lecture audio bloquée :", err));
     }
-    answerElement.innerHTML = `
-    <span style="color: #FF0000; font-weight: bold; padding: 5px; border-radius: 5px;"><img src='https://i.imgur.com/qiazPAG.png' class='alternate-shake' alt='Mauvaise réponse' style='height: 60px; vertical-align: middle;'></span>
-                    <span style="color: black; padding: 5px; border-radius: 5px; display: inline-block; margin-top: 30px; text-shadow: 2px 2px 2px white;">
-                        Réponse:
-						 <br>
-                    </span> ${correctAnswer.join(" + ")}
-                `;
+answerElement.innerHTML = `
+    <div style='text-align: center;'>
+        <img src='https://i.imgur.com/qiazPAG.png' class='alternate-shake' alt='Mauvaise réponse' style='height: 60px; display: block; margin: 0 auto -5px;'>
+        <span style="color: black; font-weight: bold; padding: 5px; border-radius: 5px; display: block; text-shadow: 2px 2px 2px white;">
+            Réponse:
+        </span>
+         <span style="font-family: Arial Black; color: white; padding: 5px 10px; border: 2px solid #00FF00; border-radius: 10px; display: inline-block; background-color: #333333;">${correctAnswer.join(" + ")}</span>
+    </div>
+`;
             }
             answerElement.style.display = "block";
 
