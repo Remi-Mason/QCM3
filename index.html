@@ -75,24 +75,30 @@
             margin-bottom: 10px;
             color: white;
         }
-        .option {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-            font-size: 18px;
-        }
-        .option input[type="checkbox"] {
-            width: 28px;
-            height: 28px;
-            margin-right: 10px;
-        }
+.option {
+    display: flex;
+    align-items: center; /* ✅ Aligne verticalement la checkbox et le texte */
+    flex-wrap: nowrap;
+    width: 100%;
+    gap: 10px;
+}
 
-        .option input[type="radio"] {
-            margin-left: 10px;  
-		    width: 24px;
-            height: 24px;
-            margin-right: 10px;
-        }
+.option input[type="checkbox"] {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+.option span {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle; /* ✅ Assure que le texte reste bien centré */
+    max-width: calc(100% - 50px);
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.4; /* ✅ Ajuste l'espacement pour améliorer l'alignement */
+}
         .answer {
             font-size: 20px;
             font-family: 'Arial Black', sans-serif;
@@ -375,31 +381,32 @@
     }
 }
 @media screen and (max-width: 768px) {
-    .option {
+    .option { 
         display: flex;
-        align-items: flex-start;
-        flex-wrap: wrap;
-        justify-content: flex-start;
+        align-items: center; /* ✅ Assure l'alignement vertical */
+        flex-wrap: nowrap; /* ✅ Garde le texte à côté de la case */
         width: 100%;
+        gap: 10px;
     }
 
     .option input[type="checkbox"] {
-        width: 32px;
-        height: 32px;
+        width: 28px; /* ✅ Ajuste la taille des cases */
+        height: 28px;
         flex-shrink: 0;
-        align-self: flex-start;
         margin-right: 10px;
     }
 
     .option span {
-        display: block;
+        display: inline-block;
         text-align: left;
+        vertical-align: middle; /* ✅ Assure que le texte reste bien centré */
         max-width: calc(100% - 50px);
-        line-height: 1.4;
-        word-break: break-word;
+        white-space: normal;
         overflow-wrap: break-word;
+        line-height: 1.4; /* ✅ Ajuste l'espacement pour améliorer l'alignement */
     }
 }
+
 
 </style>
     <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
@@ -502,10 +509,10 @@
 			          {
                 question: "<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'><span class='gif-background'>5. Qu'est-ce qu'une main courante:</span>",
                 options: ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>le cahier de consignes du service sécurité</span>",
-				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on enregistre tous les <br> événement de chaque journée</span>",
-				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on archive les rapports <br> des bureaux de contrôles</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on enregistre tous les événement de chaque journée</span>",
+				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on archive les rapports des bureaux de contrôles</span>",
 				"<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black;'>aucune des réponses</span>"],
-                answer:  ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on enregistre tous les <br> événement de chaque journée</span>"],
+                answer:  ["<span style='font-family: Arial Black; text-shadow: 2px 2px 1px black; margin-top: 10px; display: inline-block;'>un document où l'on enregistre tous les événement de chaque journée</span>"],
             }
 			
         ];
