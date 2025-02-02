@@ -445,8 +445,52 @@
         line-height: 1.4; /* ✅ Ajuste l'espacement pour améliorer l'alignement */
     }
 }
+@media screen and (max-width: 768px) {
+       .answer {
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement si nécessaire */
+    gap: 5px; /* Espace entre les éléments */
+    font-size: 20px;
+    font-family: 'Arial Black', sans-serif;
+    color: white;
+    text-shadow: 2px 2px 0 black;
+    font-weight: bold;
+}
 
+.answer span {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle; /* Corrige le décalage */
+    margin-bottom: 4px; /* Ajuste la hauteur si nécessaire */
+}
+.correct-answer {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: #333;
+    border: 3px solid #00FF00;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8); /* Effet lumineux autour du bloc, PAS du texte */
+    animation: pulse 1s ease-in-out;
+}
 
+.correct-answer img {
+    height: 30px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.correct-answer span {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-shadow: none; /* Suppression complète de l'effet glow */
+    position: relative;
+    top: 1.5px;
+}
+}
 </style>
     <!-- Ajout d'un élément audio pour le son du bouton 'Commencer' -->
     <audio id="startSound" src="audio/startSound.mp3" preload="auto"></audio>
